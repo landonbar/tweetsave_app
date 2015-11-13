@@ -1,0 +1,79 @@
+<blueprint>
+
+  <data name="saves" prop="true" />
+  <data name="basePath" value="http://evic.cloudapp.net/api/" prop="true"/>
+  <sensor watch="saves" run="saveSaves" />
+  <data name="saveHash" prop="true" />
+  <sensor watch="saves" run="updateHash" />
+
+</blueprint>
+
+<script>
+  $.cog({
+
+    init: function() {
+      this.url = this.basePath.read() + 'saves';
+      this.getSaves();
+      this.requested = true;
+    },
+
+    updateHash: function() {
+      var doc = this.saves.read();
+      var hash = {};
+      for (var i = 0; i < doc.saves.length; i++) {
+        hash[doc.saves[i].id] = i;
+      }
+      this.saveHash.write(hash);
+    },
+
+    handleReply: function(data) {
+      console.log('handling');
+      this.requested = true;
+      this.saves.write(data);
+    },
+
+    getSaves: function() {
+      console.log('getting');
+      $.ajax({
+        url: this.url,
+        xhrFields: {
+          withCredentials: true
+        },
+        type: 'GET',
+        success: this.handleReply.bind(this),
+        dataType: 'json'
+      });
+    },
+    saveSaves: function() {
+      if (this.requested) {
+        this.requested = false;
+        return;
+      }
+      console.log('saving');
+      var doc = JSON.stringify(this.saves.read());
+      $.ajax({
+        url: this.url,
+        xhrFields: {
+          withCredentials: true
+        },
+        type: 'POST',
+        success: function() {},
+        data: doc,
+        contentType: 'application/json',
+        dataType: 'json'
+      });
+    },
+    delSaves: function() {
+      $.ajax({
+        url: this.url,
+        xhrFields: {
+          withCredentials: true
+        },
+        type: 'DELETE',
+        success: function() {}
+      });
+      this.saves.write({});
+    }
+
+  });
+</script>

@@ -1,0 +1,34 @@
+<blueprint>
+
+  <data name="savedTweets" prop="true" />
+  <chain find="savesList" source="savedTweets" item="data tweet" url="savedItem.html" />
+  <sensor watch="saves"  extract="saves" pipe="savedTweets"  />
+  <sensor watch="savedTweets"  run="checkEmpty"  />
+
+</blueprint>
+
+<display>
+    <h3>Saves</h3>
+    <span id="message"></span>
+    <div id="savesList" class="Grid tweetList" ></div>
+
+    
+</display>
+
+<script>
+  $.cog({
+
+      init: function() {
+          this.checkEmpty();
+      },
+
+      checkEmpty: function() {
+          var msg=this.savedTweets.read();
+
+          if (msg===undefined || msg.length==0) this.message.text('No saves yet. Search for some Tweets.');
+          else this.message.text('');
+      }
+
+    
+  });
+</script>

@@ -1,0 +1,38 @@
+<blueprint>
+
+    <prop find="searchString" />
+
+    <chain find="list" source="tweets" item="data item" url="item.html" />
+    <sensor watch="searchString" run="render" />
+
+
+
+</blueprint>
+
+
+<display>
+
+    <h3 id="title"></h3><
+    <div id="list" class="Grid tweetList" ></div>
+
+</display>
+
+
+<script>
+
+    $.cog({
+
+        init: function() {
+          this.render();
+        },
+
+        render: function(msg){
+            console.log(msg);
+            if(!msg) this.title.html('Search for some Tweets <i class="icon icon-arrow-up"></i>');
+            else this.title.html('Tweets for ' + msg);
+        }
+
+    });
+
+</script>
+

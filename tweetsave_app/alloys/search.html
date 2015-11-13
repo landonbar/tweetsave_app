@@ -1,0 +1,36 @@
+<blueprint>
+
+  <data name="searchString" prop="true"/>
+  <command name="cmd_DoSearch" run="getTweets" />
+  <sensor watch="searchString" adapt="trimText" filter="hasText" pipe="cmd_DoSearch" />
+
+  <data name="tweets" path="SERVICE_ROOT" url="search" prop="true" format="json"/>
+  <sensor watch="tweets" run="log" />
+  
+</blueprint>
+
+<script>
+  $.cog({
+
+    getTweets: function (msg) {
+      console.log('search',msg);
+      this.tweets.req({q:msg});
+
+    },
+
+    trimText: function(){
+      return this.searchString.read().trim();
+    },
+
+    hasText: function(msg){
+      return msg.length > 0;
+    },
+
+    log: function() {
+      //console.log(this.tweets);
+    }
+
+    
+    
+  });
+</script>

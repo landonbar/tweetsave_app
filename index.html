@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Tweet Save</title>
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name=viewport content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="Tweet Saver App - Cognition Demo">
+
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
+        <link href="https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="main.css" type="text/css">
+	</head>
+	<body  class="HolyGrail">
+
+        <!-- container that will become the root element for your app-->
+        <div id="tweetsave_app" class="HolyGrail"></div>
+
+        <script src="js/lib/page.js"></script>
+        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/catbus.js"></script>
+        <script src="js/lib/cognition.js"></script>
+
+        <script>
+
+            $(function(){
+                //Inrecment the version or build number to ensure fresh cogs are pulled into the browser cache
+                $.cognition.buildNum('1.0.1');
+                //Select the container for your app and the start up cog
+                $.cognition.init($("#tweetsave_app"), "tweetsave_app/cogs/app.html");
+            });
+
+        </script>
+
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<blueprint>
+
+    <data name="mainView" value="saves" prop="true"/>
+
+    <prop find="searchString" />
+
+    <command name="updateRoute" run="update" />
+
+
+</blueprint>
+
+
+<script>
+
+    $.cog({
+
+        init: function(){
+
+            var self = this;
+            page.base('/index.html#');
+            page('/search', function () {
+                        self.mainView.write('search');
+                    });
+            page('/search/:term', function (ctx) {
+                        self.searchString.write(ctx.params.term);
+                    });
+            page('/search/at/:term', function (ctx) {
+                        self.searchString.write('@' + ctx.params.term);
+                    });
+            page('/search/hash/:term', function (ctx) {
+                        self.searchString.write('#' + ctx.params.term);
+                    });
+            page('/saves', function () {
+                        self.mainView.write('saves');
+                    });
+            page('*', function () {
+                window.location.hash = '';
+                self.mainView.write('saves');
+            });
+
+            page();
+        },
+
+        update: function (msg) {
+            console.log(msg);
+            page('/'+msg);
+        }
+
+    });
+
+</script>

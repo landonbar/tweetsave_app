@@ -1,0 +1,79 @@
+<blueprint>
+
+    <preload url="footer.html" />
+    <preload url="header.html" />
+    <preload url="main.html" />
+    <preload url="item.html" />
+    <preload url="itemView.html" />
+    <preload url="saves.html" />
+
+
+
+    <alloy url="../alloys/config.html" />
+    <alloy url="../alloys/sync.html" />
+    <alloy url="../alloys/search.html" />
+    <alloy url="../alloys/routes.html" />
+
+    <data name="mainRenderer" url="main.html" />
+    <sensor watch="mainView" transform="toUrl" pipe="mainRenderer" />
+    <sensor watch="tweets" transform="string search" pipe="mainView" />
+
+
+    <cog find="main" url="data mainRenderer" />
+    <cog find="header" url="header.html" />
+    <cog find="footer" url="footer.html" />
+
+    <!--<cog find="test" url="test.html" />-->
+
+    <sensor watch="saves" run="render" />
+
+    <sensor watch="tweets" run="renderFound" />
+
+
+
+</blueprint>
+
+<display>
+
+        <header class="HolyGrail-header" id="header"></header>
+        <main class="HolyGrail-body">
+            <article id="main" class="HolyGrail-content">
+
+            </article>
+            <nav class="HolyGrail-nav u-textCenter">
+                <div class="InputAddOn" >
+                    <span class="InputAddOn-item"><a href="index.html#/search">Found Tweets</a></span>
+                    <span class="InputAddOn-field" id="foundCount">0</span>
+                </div>
+                <p></p>
+                <div class="InputAddOn" >
+                    <span class="InputAddOn-item"><a href="index.html#/saves">Saved Tweets</a></span>
+                    <span class="InputAddOn-field" id="saveCount">0</span>
+                </div>
+            </nav>
+            <!--<div id="test"></div>-->
+        </main>
+        <footer id="footer" class="HolyGrail-footer"></footer>
+
+
+</display>
+
+
+<script>
+    $.cog({
+
+        toUrl: function(msg){
+            return msg=='search' ? 'main.html' : 'saves.html';
+        },
+
+        render: function(msg){
+            this.saveCount.text(msg.saves.length);
+        }
+        ,
+
+        renderFound: function(msg){
+            this.foundCount.html(msg.length);
+        }
+
+    });
+</script>

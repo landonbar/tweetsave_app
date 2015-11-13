@@ -1,0 +1,66 @@
+<blueprint>
+
+    <sensor node="search" on="keydown" filter="isEnter" transform="trimText" pipe="updateRoute" />
+    <sensor node="btnSearch" on="click" transform="trimText" pipe="updateRoute" />
+
+    <sensor watch="searchString" run="clearEntry" />
+
+    <sensor watch="searchString" run="log" />
+
+
+
+
+
+</blueprint>
+
+
+<display>
+    <div class="Header Header--cozy" role="banner">
+        <div class="Header-titles">
+            <h1 class="Header-title"><a href="http://evic.cloudapp.net/">Tweet Save</a></h1>
+            <h2 class="Header-subTitle">Save the Tweets</h2>
+        </div>
+        <div class="Header-actions">
+
+            <div class="InputAddOn">
+                <input id="search" class="InputAddOn-field" placeholder="Search Twitter" autofocus>
+                <button id="btnSearch" class="InputAddOn-item"> <i class="icon icon-search"> </i> </button>
+            </div>
+
+        </div>
+    </div>
+
+</display>
+
+
+<script>
+    $.cog({
+
+        ENTER_KEY: 13,
+
+        isEnter: function(ev){
+            return ev.which === this.ENTER_KEY;
+        },
+
+        trimText: function(){
+            var str = this.search.val().trim();
+            if (str.indexOf('@')===0) {
+                return 'search/at/' + encodeURI(str.substr(1)) ;
+            }
+            else if (str.indexOf('#')===0) {
+                return 'search/hash/' + encodeURI(str.substr(1));
+            }
+            return 'search/' + str;
+        },
+
+        clearEntry: function(msg,topic,tag){
+            this.search.val('');
+        },
+
+        log: function(msg){
+            console.log(msg);
+        }
+
+
+    });
+</script>

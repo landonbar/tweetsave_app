@@ -1,0 +1,27 @@
+<blueprint>
+  
+  <data name="datatest" value="test" />
+  <sensor watch="datatest" run="render" />
+  
+</blueprint>
+
+<display>
+  
+  <div id="test">
+  </div>
+  <div class="InputAddOn">
+    <span class="InputAddOn-item">…</span>
+    <input class="InputAddOn-field">
+  </div>
+    
+</display>
+
+<script>
+  $.cog({
+    
+    render: function(msg){
+      this.test.text(msg);
+    }
+    
+  });
+</script>
