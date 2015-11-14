@@ -974,7 +974,8 @@ strong {
     margin: 0 0 1.5em;
     font-size: .8em;
     font-weight: 300;
-    white-space: nowrap
+    white-space: nowrap;
+    color: #adb8ca;
 }
 
 @media (min-width: 768px) {
@@ -1086,7 +1087,6 @@ strong {
         margin: 0 0 0 1em;
         font-size: .8em;
         font-weight: 300;
-        color: gray
     }
 
     .Header--cozy .Header-actions {
