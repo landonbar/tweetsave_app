@@ -3,6 +3,11 @@
 
     <sensor watch="tweet" change="true" run="render" />
 
+    <sensor node="itemView" on="click" run="unsaveTweet" />
+
+    <prop find="saves" />
+    <prop find="saveHash" />
+
 </blueprint>
 
 
@@ -30,6 +35,13 @@
 
         init: function() {
 
+        },
+
+        unsaveTweet: function() {
+            var newSaves = this.saves.read();
+            var hash = this.saveHash.read();
+            newSaves.saves.splice(hash[this.item.id],1);
+            this.saves.write(newSaves);
         },
 
         render: function(msg){

@@ -23,9 +23,10 @@
       },
 
       checkEmpty: function() {
+          this.message.text('');
           var msg=this.savedTweets.read();
 
-          if (msg===undefined || msg.length==0) this.message.text('No saves yet. Search for some Tweets.');
+          if (msg===undefined || msg.length==0) this.message.text('No saves yet. Search for some tweets.');
           else this.message.text('');
       }
 

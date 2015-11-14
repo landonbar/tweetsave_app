@@ -28,8 +28,15 @@
 
         render: function(msg){
             console.log(msg);
-            if(!msg) this.title.html('Search for some Tweets <i class="icon icon-arrow-up"></i>');
-            else this.title.html('Tweets for ' + msg);
+            if(!msg) {
+                this.title.html('Search for some Tweets <i class="icon icon-arrow-up"></i>');
+                this.title.css("text-align", "center");
+            }
+            else {
+                var searchTerm = (msg.charAt(0) === '#' || msg.charAt(0) === '@') ? msg : '&#8220;' + msg + '&#8221;';
+                this.title.html('Tweets for ' + searchTerm);
+                this.title.css("text-align", "left");
+            }
         }
 
     });

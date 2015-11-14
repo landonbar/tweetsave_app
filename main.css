@@ -84,6 +84,7 @@ img {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+    max-width:100%;
 }
 
 svg:not(:root) {
@@ -1122,7 +1123,7 @@ strong {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    background: #ffa339; /* Old browsers */
+    background: #9da7ae; /* Old browsers */
     background: -moz-linear-gradient(top, #9da7ae 0%, #30334d 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #9da7ae 0%,#30334d 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #9da7ae 0%,#30334d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
@@ -1142,6 +1143,12 @@ strong {
     margin-top: 1.5em
 }
 
+.HolyGrail-content span {
+    font-size: 1.25em;
+    font-weight: 400;
+    color: #ffd716; /* bright yellow */
+}
+
 .HolyGrail-nav {
     -webkit-box-ordinal-group: 0;
     -webkit-order: -1;
@@ -1153,6 +1160,11 @@ strong {
     padding: 1em;
     border-radius: 3px;
     background: rgba(1, 1, 20, .5);
+}
+
+.HolyGrail-nav span {
+    font-weight: 400;
+    color: #d5dbdd;
 }
 
 @media (min-width: 768px) {
@@ -1238,7 +1250,9 @@ strong {
 }
 
 .InputAddOn-item:hover {
-    background: #f6a60d; /* orangish yellow */
+    /*background: #f6a60d; /!* orangish yellow *!/*/
+    /*background: #f6ba23; /!* yellow *!/*/
+    background: #ffce0f; /* bright yellow */
 }
 
 .InputAddOn-item-alt {
@@ -1872,6 +1886,10 @@ pre {
     -webkit-box-shadow: 0 0 0 4px #f6ba23;
     -moz-box-shadow: 0 0 0 4px #f6ba23;
     box-shadow: 0 0 0 4px #f6ba23;
+}
+
+.unsavedTweet {
+    opacity: .2;
 }
 
 .deleted {
