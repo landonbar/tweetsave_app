@@ -2,7 +2,7 @@
 
     <prop find="searchString" />
 
-    <chain find="list" source="tweets" item="data item" url="item.html" />
+    <chain find="list" source="tweets" item="data item" url="itemView.html" />
     <sensor watch="searchString" run="render" />
 
 
@@ -27,7 +27,7 @@
         },
 
         render: function(msg){
-            console.log(msg);
+
             if(!msg) {
                 this.title.html('Search for some Tweets <i class="icon icon-arrow-up"></i>');
                 this.title.css("text-align", "center");

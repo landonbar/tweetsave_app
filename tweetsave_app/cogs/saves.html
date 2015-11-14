@@ -1,7 +1,7 @@
 <blueprint>
 
   <data name="savedTweets" prop="true" />
-  <chain find="savesList" source="savedTweets" item="data tweet" url="savedItem.html" />
+  <chain find="savesList" source="savedTweets" item="data item" url="savedItemView.html" />
   <sensor watch="saves"  extract="saves" pipe="savedTweets"  />
   <sensor watch="savedTweets"  run="checkEmpty"  />
 

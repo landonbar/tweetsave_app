@@ -1,0 +1,55 @@
+<blueprint>
+
+    <sensor watch="item" change="true" run="render" />
+    <prop find="item" />
+
+</blueprint>
+
+<display>
+
+    <div class="Media">
+        <img id="profilePic" class="Media-figure Image" src="" >
+        <div class="Media-body">
+            <h3 id="user" class="Media-title"> <span id="handle" style="font-size: xx-small;color: darkgray"></span></h3>
+            <p id="tweetText" style="text-wrap: normal; flex-wrap: wrap;overflow-x: hidden" ></p>
+
+        </div>
+    </div>
+    <span id="photo"></span>
+    
+</display>
+
+<script>
+  $.cog({
+
+      init: function(){
+
+      },
+
+      render: function(msg){
+
+          var bits = msg.text.split(' ');
+          for (var x=0; x<bits.length;x++){
+              if (bits[x].indexOf('@')===0) {
+                  bits[x] = '<a href="/index.html#/search/at/' + encodeURI(bits[x].substr(1)) + '">' + bits[x] + '</a>';
+              }
+              else if (bits[x].indexOf('#')===0) {
+                  bits[x] = '#<a href="/index.html#/search/hash/' + encodeURI(bits[x].substr(1)) + '">' + bits[x].substr(1) + '</a>';
+              }
+              else if (bits[x].indexOf('http')===0) {
+                  bits[x] = '<a target="_blank" href="' + bits[x] + '">' + bits[x].replace('https://','').replace('http://','') + '</a>';
+              }
+          }
+          var html = bits.join(' ');
+
+          this.tweetText.html(html);
+          this.user.text(msg.user_name);
+          this.handle.text(msg.user_screen_name);
+          this.profilePic.attr('src',msg.user_img_url);
+          if (msg.photo!='' ) this.photo.html('<img id="photo" class="" src="'+ msg.photo + '" />');
+          else this.photo.html('');
+
+      }
+    
+  });
+</script>
