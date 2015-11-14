@@ -3,7 +3,7 @@
   <data name="saves" prop="true" />
   <data name="basePath" value="http://evic.cloudapp.net/api/" prop="true"/>
   <sensor watch="saves" run="saveSaves" />
-  <data name="saveHash" prop="true" />
+  <data name="saveHash" prop="true"  />
   <sensor watch="saves" run="updateHash" />
 
 </blueprint>
@@ -12,6 +12,7 @@
   $.cog({
 
     init: function() {
+      this.saveHash.write({});
       this.url = this.basePath.read() + 'saves';
       this.getSaves();
       this.requested = true;
@@ -19,6 +20,7 @@
 
     updateHash: function() {
       var doc = this.saves.read();
+      console.log(doc);
       var hash = {};
       for (var i = 0; i < doc.saves.length; i++) {
         hash[doc.saves[i].id] = i;
@@ -29,6 +31,7 @@
     handleReply: function(data) {
       console.log('handling');
       this.requested = true;
+      console.log(data);
       this.saves.write(data);
     },
 

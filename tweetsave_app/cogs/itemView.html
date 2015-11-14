@@ -10,6 +10,7 @@
     <prop find="saveHash" />
 
     <cog find="itemView" url="tweet.html" />
+    <prop find="item"/>
 
 
 </blueprint>
@@ -36,6 +37,7 @@
 
             if (e.target && e.target.localName && e.target.localName=='a') return this.selected.read() ;
 
+            var tweet = this.item.read();
 
             this.button.toggleClass('focusTweet');
             var newSaves = this.saves.read();
@@ -44,13 +46,13 @@
 
             if (this.selected.read()) {
                 selected=false;
-                if(hash[this.item.id]!==undefined){
-                    newSaves.saves.splice(hash[this.item.id],1)
+                if(hash[tweet.id]!==undefined){
+                    newSaves.saves.splice(hash[tweet.id],1)
                 }
             }
             else {
                 selected=true;
-                newSaves.saves.push(this.item);
+                newSaves.saves.push(tweet);
             }
             this.saves.write(newSaves);
 
@@ -60,6 +62,8 @@
         markSaved: function (msg) {
 
             var hash = this.saveHash.read();
+
+
             if(hash[msg.id]) {
                 this.selected.write(true);
                 this.button.addClass('focusTweet');
