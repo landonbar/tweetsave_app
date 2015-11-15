@@ -30,7 +30,10 @@
 
         },
 
-        unsaveTweet: function() {
+        unsaveTweet: function(e) {
+
+            if (e.target && e.target.localName && e.target.localName=='a') return;
+
             var tweet = this.item.read();
             var newSaves = this.saves.read();
             var hash = this.saveHash.read();
