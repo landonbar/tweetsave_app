@@ -13,6 +13,10 @@ body {
     margin: 0
 }
 
+*:focus {
+    outline: none;
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
     display: block
 }
@@ -924,7 +928,7 @@ strong {
 }
 
 .Header {
-    padding: 1em;
+    padding: .5em 1em 0 1em;
     background: #282b41; /* dark purple gray */
     text-align: center;
     font-size: 1.5em;
@@ -1008,13 +1012,12 @@ strong {
 
 .Header-actions input {
     background: #d5dbdd;
-    outline: none;
     border: none;
 }
 
 .Header-actions input:focus {
     background: #fff;
-    outline: none;
+    /*outline: none;*/
     border: none;
 }
 
@@ -1058,7 +1061,7 @@ strong {
 
 @media (min-width: 768px) {
     .Header--cozy {
-        padding: 1.5em;
+        padding: 1.5em 1.5em .5em 1.5em;
         -webkit-box-align: center;
         -webkit-align-items: center;
         -ms-flex-align: center;
@@ -1226,11 +1229,26 @@ strong {
     box-shadow: 0 0 0 4px #666a77;
 }
 
+.HolyGrail-nav div:first-child {
+    margin-top: .25em;
+}
+
+.HolyGrail-nav div:last-child {
+    margin-bottom: .25em;
+}
+
+.HolyGrail-nav .InputAddOn-field {
+    flex: 3 0 auto;
+}
+
+.HolyGrail-nav .InputAddOn-item {
+    flex: 5 0 auto;
+}
+
 .InputAddOn-field {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
-    flex: 1;
     flex-wrap: nowrap;
 }
 
@@ -1246,12 +1264,10 @@ strong {
     background: #f6ba23; /* yellow */
     color: #666;
     font: inherit;
-    font-weight: 400
+    font-weight: 400;
 }
 
 .InputAddOn-item:hover {
-    /*background: #f6a60d; /!* orangish yellow *!/*/
-    /*background: #f6ba23; /!* yellow *!/*/
     background: #ffce0f; /* bright yellow */
 }
 
